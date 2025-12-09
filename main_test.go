@@ -140,9 +140,11 @@ proxy:
 		startAllProxiesFn = origStart
 		stopAllProxiesFn = origStop
 		reloadConfigFn = origReload
+		reloadMutex.Lock()
 		if reloadTimer != nil {
 			reloadTimer.Stop()
 		}
+		reloadMutex.Unlock()
 		closeWatcher()
 	}()
 
